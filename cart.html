@@ -1,26 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Cart</title>
 </head>
+
 <body>
     <h1>Cart</h1>
-    <div class="container">
-        <div id="items"></div>
-        <div id="pricing"></div>
+    <div class="container" id="cart">
+        <div id="menu"></div>
+        <div id="pricing">
+            <h3 id="total_price"></h3>
+            <button id="place_order">Place Order</button>
+        </div>
     </div>
 
     <script>
 
+        let order_btn = document.getElementById("place_order");
+
+        order_btn.onclick = () => {
+            placeOrder();
+        }
+
         let cart = JSON.parse(localStorage.getItem("cart"));
 
-        function setItems(){
-            
+        let total_price = 0;
+
+        async function setItems() {
+
+            let menu = document.getElementById("menu");
+
+            for (k in cart) {
+                let res = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${k}`);
+
+                let data = await res.json();
+
+                data = data.meals[0];
+
+                let div = document.createElement("div");
+
+                let img = document.createElement("img");
+                img.src = data.strMealThumb;
+
+                let name = document.createElement("p");
+                name.textContent = data.strMeal;
+
+                let description = document.createElement("p");
+
+                description.textContent = data.strArea + ", " + data.strCategory;
+
+                let price = document.createElement("p");
+
+                // Using id as price
+
+                price.textContent = "Rs. " + Math.round(data.idMeal / 1000);
+
+                total_price += (Math.round(data.idMeal / 1000) * cart[k]);
+
+                let qty = document.createElement("p");
+
+                qty.textContent = "Qty: " + cart[k];
+
+                // let btn = document.createElement("button");
+                // btn.textContent = "Add to cart";
+                // btn.onclick = () => {
+                //     let obj = JSON.parse(localStorage.getItem("cart"));
+                //     if(obj[idMeal] == undefined){
+                //         obj[idMeal] = 1;
+                //     }else{
+                //         obj[idMeal]++;
+                //     }
+                //     localStorage.setItem("cart", JSON.stringify(obj));
+                // }
+
+                div.append(img, name, description, price);
+
+                menu.append(div)
+            }
+
+            document.getElementById("total_price").innerText = "Total Price Rs. " + total_price;
+        }
+
+        setItems();
+
+        function placeOrder() {
+            alert("Your order is accepted");
+            setTimeout(() => {
+                alert("Your order is being cooked");
+            }, 3000);
+            setTimeout(() => {
+                alert("Your order is ready");
+            }, 8000);
+            setTimeout(() => {
+                alert("Order out for delivery");
+            }, 10000);
+            setTimeout(() => {
+                alert("Order delivered");
+            }, 12000);
         }
 
     </script>
 </body>
+
 </html>
