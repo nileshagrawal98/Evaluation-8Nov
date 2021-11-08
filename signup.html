@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +8,9 @@
     <link rel="stylesheet" href="style.css">
     <title>SignUp</title>
 </head>
+
 <body>
-    
+
     <div class="container">
         <form id="signup_form" onsubmit="signup(event)">
             <input type="text" placeholder="Enter Name" id="signup_name" required>
@@ -25,7 +27,7 @@
 
     <script>
 
-        async function signup(e){
+        async function signup(e) {
             e.preventDefault();
 
             let form = document.getElementById("signup_form");
@@ -38,20 +40,30 @@
                 password: form.signup_pass.value,
                 username: form.signup_username.value,
                 mobile: form.signup_mobile.value,
-                description: form.signup_description.value,                
+                description: form.signup_description.value,
             }
 
-            console.log(details);
+            // console.log(details);
 
-            let res = await fetch("https://masai-api-mocker.herokuapp.com/auth/register", {
-                method: "POST",
-                body: JSON.stringify(details),
-                headers:{
-                    "Content-Type": "application/json",
-                }
-            });
+            try {
+                let res = await fetch("https://masai-api-mocker.herokuapp.com/auth/register", {
+                    method: "POST",
+                    body: JSON.stringify(details),
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                });
 
-            let data = await res.json();
+                let data = await res.json();
+
+                alert("Registered Successfully");
+                window.location.href = "login.html";
+
+            } catch (e) {
+                console.log(e);
+            }
+
+
 
             console.log(data);
 
@@ -62,6 +74,7 @@
     </script>
 
 
-<!-- user: nilesh, pass:nilesh123 -->
+    <!-- user: nilesh, pass:nilesh123 -->
 </body>
+
 </html>
