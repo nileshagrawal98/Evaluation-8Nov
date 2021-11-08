@@ -53,3 +53,13 @@ body {
 #login_form > button, #signup_form > input{
     padding: 4px;
 }
+
+#menu {
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    gap: 5%;
+}
+
+#menu > div > img{
+    width: 100%;
+}
