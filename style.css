@@ -36,7 +36,7 @@ body {
     margin-right: 10px;
 }
 
-#login_form {
+#login_form, #signup_form {
     border: 1px solid rgb(124, 13, 13);
     display: flex;
     flex-direction: column;
@@ -46,10 +46,10 @@ body {
     gap: 10px;
 }
 
-#login_form > input{
+#login_form > input, #signup_form > input{
     padding: 10px;
 }
 
-#login_form > button{
+#login_form > button, #signup_form > input{
     padding: 4px;
 }
