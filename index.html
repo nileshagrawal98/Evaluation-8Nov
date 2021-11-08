@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,25 +8,20 @@
     <link rel="stylesheet" href="style.css">
     <title>Home</title>
 </head>
-<body>
-    
-    <nav id="navbar">
-        <div class="container">
-            <ul>
-                <li><a href="menu.html">Menu</a></li>
-            </ul>
-            <ul>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="signup.html">SignUp</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <script>
+<body>
+
+    <nav id="navbar"></nav>
+
+    <script type="module">
+
+        import navbar from "./component/navbar.js";
+
+        document.getElementById("navbar").innerHTML = navbar();
 
         let loggedUser = localStorage.getItem("loggedUser");
 
-        if(loggedUser !== null && loggedUser !== ""){
+        if (loggedUser !== null && loggedUser !== "") {
 
             // console.log(loggedUser);
 
@@ -47,7 +43,7 @@
 
         }
 
-        function userLogout(){
+        function userLogout() {
             localStorage.setItem("loggedUser", "");
             let li1 = document.createElement("li");
             let a1 = document.createElement("a");
@@ -70,4 +66,5 @@
     </script>
 
 </body>
+
 </html>

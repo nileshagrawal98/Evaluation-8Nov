@@ -8,9 +8,15 @@ body {
     margin: auto;
 }
 
+h1 {
+    text-align: center;
+}
+
 #navbar {
     background-color: red;
     color: white;
+    font-size: 18px;
+    font-weight: 700;
 }
 
 #navbar > div {
@@ -33,7 +39,7 @@ body {
 }
 
 #navbar > div > ul:nth-of-type(2) > li {
-    margin-right: 10px;
+    margin-right: 14px;
 }
 
 #login_form, #signup_form {
@@ -62,4 +68,12 @@ body {
 
 #menu > div > img{
     width: 100%;
+}
+
+#cart {
+    display: flex;
+}
+
+#pricing {
+    margin-left: 20px;
 }

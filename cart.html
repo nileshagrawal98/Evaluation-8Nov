@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <nav id="navbar"></nav>
     <h1>Cart</h1>
     <div class="container" id="cart">
         <div id="menu"></div>
@@ -18,6 +19,14 @@
             <button id="place_order">Place Order</button>
         </div>
     </div>
+
+
+    <script type="module">
+        import navbar from "./component/navbar.js";
+
+        document.getElementById("navbar").innerHTML = navbar();
+
+    </script>
 
     <script>
 
@@ -66,19 +75,13 @@
 
                 qty.textContent = "Qty: " + cart[k];
 
-                // let btn = document.createElement("button");
-                // btn.textContent = "Add to cart";
-                // btn.onclick = () => {
-                //     let obj = JSON.parse(localStorage.getItem("cart"));
-                //     if(obj[idMeal] == undefined){
-                //         obj[idMeal] = 1;
-                //     }else{
-                //         obj[idMeal]++;
-                //     }
-                //     localStorage.setItem("cart", JSON.stringify(obj));
-                // }
+                let btn = document.createElement("button");
+                btn.textContent = "Remove";
+                btn.onclick = () => {
+                    removeItem(data.idMeal);
+                }
 
-                div.append(img, name, description, price);
+                div.append(img, name, description, price, qty);
 
                 menu.append(div)
             }
@@ -102,6 +105,16 @@
             setTimeout(() => {
                 alert("Order delivered");
             }, 12000);
+        }
+
+        function removeItem(id) {
+            let obj = JSON.parse(localStorage.getItem("cart"));
+            if (obj[idMeal] == 1) {
+                obj[idMeal] = 1;
+            } else {
+                obj[idMeal]++;
+            }
+            localStorage.setItem("cart", JSON.stringify(obj));
         }
 
     </script>

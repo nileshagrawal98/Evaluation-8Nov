@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+    <nav id="navbar"></nav>
     <div class="container">
         <form id="signup_form" onsubmit="signup(event)">
             <input type="text" placeholder="Enter Name" id="signup_name" required>
@@ -24,6 +24,12 @@
     </div>
 
 
+    <script type="module">
+        import navbar from "./component/navbar.js";
+
+        document.getElementById("navbar").innerHTML = navbar();
+
+    </script>
 
     <script>
 

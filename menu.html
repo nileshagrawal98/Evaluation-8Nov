@@ -10,11 +10,18 @@
 </head>
 
 <body>
-
+    <nav id="navbar"></nav>
     <div class="container">
         <h1>Available Dishes</h1>
         <div id="menu"></div>
     </div>
+
+    <script type="module">
+        import navbar from "./component/navbar.js";
+
+        document.getElementById("navbar").innerHTML = navbar();
+
+    </script>
 
     <script>
 
@@ -65,7 +72,7 @@
 
                 // Using id as price
 
-                price.textContent = Math.round(idMeal/1000);
+                price.textContent = "Rs. " + Math.round(idMeal/1000);
 
                 let btn = document.createElement("button");
                 btn.textContent = "Add to cart";
