@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Cart</title>
 </head>
@@ -20,15 +23,12 @@
         </div>
     </div>
 
-
     <script type="module">
-        import navbar from "./component/navbar.js";
+
+        import { navbar, logUser, userLogout } from "./component/navbar.js";
 
         document.getElementById("navbar").innerHTML = navbar();
-
-    </script>
-
-    <script>
+        logUser();
 
         let order_btn = document.getElementById("place_order");
 
@@ -36,15 +36,17 @@
             placeOrder();
         }
 
-        let cart = JSON.parse(localStorage.getItem("cart"));
-
         let total_price = 0;
 
         async function setItems() {
 
+            let cart = JSON.parse(localStorage.getItem("cart"));
+
             let menu = document.getElementById("menu");
 
-            for (k in cart) {
+            menu.innerHTML = "";
+
+            for (let k in cart) {
                 let res = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${k}`);
 
                 let data = await res.json();
@@ -81,7 +83,7 @@
                     removeItem(data.idMeal);
                 }
 
-                div.append(img, name, description, price, qty);
+                div.append(img, name, description, price, qty, btn);
 
                 menu.append(div)
             }
@@ -109,12 +111,14 @@
 
         function removeItem(id) {
             let obj = JSON.parse(localStorage.getItem("cart"));
-            if (obj[idMeal] == 1) {
-                obj[idMeal] = 1;
+            if (obj[id] == 1) {
+                delete obj[id];
             } else {
-                obj[idMeal]++;
+                obj[id]--;
             }
             localStorage.setItem("cart", JSON.stringify(obj));
+            total_price = 0;
+            setItems();
         }
 
     </script>

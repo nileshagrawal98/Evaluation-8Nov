@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Home</title>
 </head>
@@ -15,53 +18,10 @@
 
     <script type="module">
 
-        import navbar from "./component/navbar.js";
+        import  { navbar, logUser, userLogout } from "./component/navbar.js";
 
         document.getElementById("navbar").innerHTML = navbar();
-
-        let loggedUser = localStorage.getItem("loggedUser");
-
-        if (loggedUser !== null && loggedUser !== "") {
-
-            // console.log(loggedUser);
-
-            let user_option = document.querySelector("#navbar > div > ul:nth-of-type(2)");
-
-            user_option.innerHTML = "";
-
-            let name = document.createElement("li");
-
-            name.textContent = loggedUser;
-
-            let logout = document.createElement("li");
-
-            logout.textContent = "Logout";
-            logout.onclick = () => {
-                userLogout();
-            }
-            user_option.append(name, logout);
-
-        }
-
-        function userLogout() {
-            localStorage.setItem("loggedUser", "");
-            let li1 = document.createElement("li");
-            let a1 = document.createElement("a");
-            a1.href = "login.html";
-            a1.textContent = "Login";
-            li1.append(a1);
-
-            let li2 = document.createElement("li");
-            let a2 = document.createElement("a");
-            a2.href = "signup.html";
-            a2.textContent = "Signup";
-            li2.append(a2);
-
-            let user_option = document.querySelector("#navbar > div > ul:nth-of-type(2)");
-
-            user_option.innerHTML = "";
-            user_option.append(li1, li2);
-        }
+        logUser();
 
     </script>
 
